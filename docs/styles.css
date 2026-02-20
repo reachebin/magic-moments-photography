@@ -189,7 +189,7 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   inset:0;
   background:
     linear-gradient(180deg, rgba(20,20,20,.35), rgba(20,20,20,.20)),
-    url("https://images.unsplash.com/photo-1523437237164-d442d57cc3c9?auto=format&fit=crop&w=2400&q=80");
+    uurl("assets/images/hero.jpg");
   background-size: cover;
   background-position: center;
   transform: scale(1.02);
