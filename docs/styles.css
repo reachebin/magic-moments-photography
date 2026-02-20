@@ -637,7 +637,15 @@ h3{
     transform: none;
   }
 
-  .hero__content{ padding: 70px 0 55px; }
+  .hero__content{
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* reduce kicker tracking slightly on small screens */
+  .hero .kicker{
+    letter-spacing: .18em;
+  }
 }
   .site-nav.is-open{ display:flex; }
   .dropdown__menu{
