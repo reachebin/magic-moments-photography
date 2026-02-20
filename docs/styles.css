@@ -604,20 +604,3 @@ h3{
   .form__row{ grid-template-columns: 1fr; }
   h2{ font-size: 34px; }
 }
-/* ===== HERO: show full image on mobile (no crop) ===== */
-@media (max-width: 760px){
-  .hero{
-    min-height: 75vh; /* adjust if you want more/less height */
-  }
-
-  .hero__media{
-    /* Keep your same hero image, but show the full picture */
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    transform: none;
-
-    /* Fills any empty space around the contained image */
-    background-color: var(--bg);
-  }
-}
