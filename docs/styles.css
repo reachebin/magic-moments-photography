@@ -188,19 +188,13 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   position:absolute;
   inset:0;
   background:
-    linear-gradient(180deg, rgba(20,20,20,.35), rgba(20,20,20,.20)),
-    uurl("assets/images/hero.jpg");
+  linear-gradient(180deg, rgba(20,20,20,.12), rgba(20,20,20,.06)),
+  url("assets/images/hero.jpg");
   background-size: cover;
   background-position: center;
-  transform: scale(1.02);
+  transform: none;
 }
-.hero__overlay{
-  position:absolute;
-  inset:0;
-  background: radial-gradient(900px 500px at 20% 35%, rgba(176,141,87,.28), transparent 60%),
-              radial-gradient(900px 500px at 80% 40%, rgba(0,0,0,.20), transparent 55%);
-  mix-blend-mode: multiply;
-}
+.hero__overlay{ display: none; }
 .hero__content{
   position: relative;
   padding: 90px 0 70px;
