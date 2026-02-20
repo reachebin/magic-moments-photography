@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Magic Moments Photography</title>
+  <meta name="description" content="Magic Moments Photography — timeless, documentary-inspired storytelling for weddings, couples, families, and events." />
+
+  <!-- Social preview (edit later) -->
+  <meta property="og:title" content="Magic Moments Photography" />
+  <meta property="og:description" content="Timeless, documentary-inspired storytelling." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body id="top">
+  <!-- Header -->
+  <header class="site-header" data-elevate>
+    <a class="brand" href="#top" aria-label="Magic Moments Photography home">
+      <span class="brand__name">Magic Moments</span>
+      <span class="brand__tag">Photography</span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="siteNav">
+      <span class="sr-only">Open menu</span>
+      <span class="nav-toggle__bar"></span>
+      <span class="nav-toggle__bar"></span>
+    </button>
+
+    <nav id="siteNav" class="site-nav" aria-label="Primary">
+      <a href="#portfolio">Portfolio</a>
+      <a href="#films">Films</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#about">About</a>
+
+      <div class="dropdown">
+        <button class="dropdown__btn" type="button" aria-expanded="false">
+          Info
+          <span class="dropdown__chev" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown__menu" role="menu">
+          <a role="menuitem" href="#how-it-works">How It Works</a>
+          <a role="menuitem" href="#faq">FAQ</a>
+          <a role="menuitem" href="#for-clients">For Clients</a>
+        </div>
+      </div>
+
+      <a class="btn btn--primary" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main>
+    <section class="hero" aria-label="Hero">
+      <div class="hero__media" role="img" aria-label="Sample hero image"></div>
+      <div class="hero__overlay"></div>
+
+      <div class="container hero__content">
+        <p class="kicker">Fine Art • Documentary • Wedding & Lifestyle</p>
+        <h1>Captured the way it felt.</h1>
+        <p class="subhead">
+          Timeless photography for weddings, couples, families, and events — with a calm, guided approach and space for real moments.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--ghost" href="#portfolio">View Portfolio</a>
+          <a class="btn btn--ghost" href="#contact">Inquire</a>
+        </div>
+      </div>
+
+      <a class="scroll-cue" href="#portfolio" aria-label="Scroll to portfolio">
+        <span aria-hidden="true">Scroll</span>
+        <span class="scroll-cue__line" aria-hidden="true"></span>
+      </a>
+    </section>
+
+    <!-- Portfolio / Collage -->
+    <section id="portfolio" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Portfolio</h2>
+          <p class="muted">
+            Replace the sample images with your own work. This grid is built for a clean, editorial look.
+          </p>
+        </div>
+
+        <div class="filters" role="tablist" aria-label="Portfolio filters">
+          <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="chip" data-filter="weddings" role="tab" aria-selected="false">Weddings</button>
+          <button class="chip" data-filter="couples" role="tab" aria-selected="false">Couples</button>
+          <button class="chip" data-filter="family" role="tab" aria-selected="false">Family</button>
+          <button class="chip" data-filter="events" role="tab" aria-selected="false">Events</button>
+        </div>
+
+        <div class="masonry" aria-label="Image gallery">
+          <!-- Weddings -->
+          <figure class="tile" data-category="weddings">
+            <img src="https://images.unsplash.com/photo-1523438097201-512ae7d59c5e?auto=format&fit=crop&w=1200&q=80" alt="Wedding moment" loading="lazy">
+          </figure>
+          <figure class="tile" data-category="weddings">
+            <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1200&q=80" alt="Bride and groom" loading="lazy">
+          </figure>
+
+          <!-- Couples -->
+          <figure class="tile" data-category="couples">
+            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80" alt="Couple portrait" loading="lazy">
+          </figure>
+          <figure class="tile" data-category="couples">
+            <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?auto=format&fit=crop&w=1200&q=80" alt="Couple walking" loading="lazy">
+          </figure>
+
+          <!-- Family -->
+          <figure class="tile" data-category="family">
+            <img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=1200&q=80" alt="Family portrait" loading="lazy">
+          </figure>
+
+          <!-- Events -->
+          <figure class="tile" data-category="events">
+            <img src="https://images.unsplash.com/photo-1521337706264-a414f153a5b6?auto=format&fit=crop&w=1200&q=80" alt="Event candid" loading="lazy">
+          </figure>
+
+          <!-- Mixed -->
+          <figure class="tile" data-category="weddings">
+            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" alt="Wedding ceremony" loading="lazy">
+          </figure>
+          <figure class="tile" data-category="events">
+            <img src="https://images.unsplash.com/photo-1520975958225-0d6c98f7cf59?auto=format&fit=crop&w=1200&q=80" alt="Celebration" loading="lazy">
+          </figure>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn--primary" href="#contact">Check availability</a>
+          <a class="btn btn--link" href="https://www.instagram.com/magicmoments.photographi/" target="_blank" rel="noreferrer">
+            See more on Instagram →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Films -->
+    <section id="films" class="section section--alt">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Films</h2>
+            <p class="muted">
+              If you offer video, embed your YouTube/Vimeo links here. If not, rename this section to “Stories” or remove it.
+            </p>
+
+            <ul class="bullets">
+              <li>Short highlight films</li>
+              <li>Full ceremony coverage</li>
+              <li>Engagement story sessions</li>
+            </ul>
+
+            <a class="btn btn--ghost-dark" href="#contact">Ask about film packages</a>
+          </div>
+
+          <div class="video-card">
+            <div class="video-card__frame">
+              <!-- Replace with your video embed -->
+              <iframe
+                title="Sample film embed"
+                src="https://www.youtube.com/embed/ysz5S6PUM-U"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <p class="tiny muted">Tip: replace the embed URL with your own YouTube/Vimeo film.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="split split--reverse">
+          <div>
+            <h2>About</h2>
+            <p class="lead">
+              I’m <strong>[Your Name]</strong>, the photographer behind Magic Moments.
+            </p>
+            <p class="muted">
+              My work is guided, calm, and documentary-inspired — focused on real connection, soft direction, and images that still feel like you years from now.
+              Whether it’s a wedding day, a family session, or a milestone event, the goal is the same: preserve the story honestly and beautifully.
+            </p>
+
+            <div class="stats">
+              <div class="stat">
+                <div class="stat__num">100+</div>
+                <div class="stat__label">Sessions captured</div>
+              </div>
+              <div class="stat">
+                <div class="stat__num">48h</div>
+                <div class="stat__label">Sneak peek turnaround</div>
+              </div>
+              <div class="stat">
+                <div class="stat__num">4.9★</div>
+                <div class="stat__label">Client rating</div>
+              </div>
+            </div>
+
+            <a class="btn btn--primary" href="#how-it-works">How it works</a>
+          </div>
+
+          <div class="portrait-card">
+            <div class="portrait-card__img" role="img" aria-label="Photographer portrait placeholder"></div>
+            <p class="tiny muted">Replace this portrait placeholder with your own image.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="section section--alt">
+      <div class="container">
+        <div class="section__head">
+          <h2>Kind words</h2>
+          <p class="muted">A simple slider you can edit in <code>script.js</code>.</p>
+        </div>
+
+        <div class="slider" aria-roledescription="carousel">
+          <div class="slider__viewport" data-slider-viewport>
+            <!-- Slides injected by JS -->
+          </div>
+
+          <div class="slider__controls">
+            <button class="btn btn--ghost-dark" type="button" data-prev aria-label="Previous testimonial">←</button>
+            <button class="btn btn--ghost-dark" type="button" data-next aria-label="Next testimonial">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info -->
+    <section id="how-it-works" class="section">
+      <div class="container">
+        <h2>How it works</h2>
+
+        <div class="steps">
+          <div class="step">
+            <p class="kicker">01</p>
+            <h3>Inquiry</h3>
+            <p class="muted">Send your date + details. I’ll confirm availability and package options.</p>
+          </div>
+          <div class="step">
+            <p class="kicker">02</p>
+            <h3>Planning</h3>
+            <p class="muted">We align on timeline, locations, and the look/feel you want—simple and stress-free.</p>
+          </div>
+          <div class="step">
+            <p class="kicker">03</p>
+            <h3>Session day</h3>
+            <p class="muted">Gentle direction when needed; otherwise I document what naturally unfolds.</p>
+          </div>
+          <div class="step">
+            <p class="kicker">04</p>
+            <h3>Delivery</h3>
+            <p class="muted">Online gallery delivery with high-res downloads and print options.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section section--alt">
+      <div class="container">
+        <h2>FAQ</h2>
+
+        <div class="faq">
+          <details>
+            <summary>How do we book?</summary>
+            <p class="muted">Use the contact form below. I’ll reply with availability, packages, and the next steps.</p>
+          </details>
+          <details>
+            <summary>Do you travel?</summary>
+            <p class="muted">Yes—share the location and date. Travel fees depend on distance and coverage time.</p>
+          </details>
+          <details>
+            <summary>When will we receive our gallery?</summary>
+            <p class="muted">Typical delivery is 2–6 weeks depending on season and package. Sneak peeks can be faster.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="for-clients" class="section">
+      <div class="container">
+        <div class="callout">
+          <div>
+            <h2>For clients</h2>
+            <p class="muted">Add your client gallery link / questionnaire / print store here when ready.</p>
+          </div>
+          <div class="callout__actions">
+            <a class="btn btn--ghost" href="#" onclick="return false;">Client portal (add link)</a>
+            <a class="btn btn--ghost" href="#" onclick="return false;">Print shop (add link)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section--alt">
+      <div class="container">
+        <div class="split">
+          <div>
+            <h2>Contact</h2>
+            <p class="muted">
+              GitHub Pages can’t send emails by itself. The easiest option is Formspree (free tier) or a mailto link.
+            </p>
+
+            <div class="contact-cards">
+              <a class="contact-card" href="mailto:hello@yourdomain.com">
+                <span class="contact-card__label">Email</span>
+                <span class="contact-card__value">hello@yourdomain.com</span>
+              </a>
+              <a class="contact-card" href="https://www.instagram.com/magicmoments.photographi/" target="_blank" rel="noreferrer">
+                <span class="contact-card__label">Instagram</span>
+                <span class="contact-card__value">@magicmoments.photographi</span>
+              </a>
+            </div>
+          </div>
+
+          <form class="form" action="https://formspree.io/f/yourFormId" method="POST">
+            <div class="form__row">
+              <label>
+                Name
+                <input name="name" type="text" placeholder="Your name" required>
+              </label>
+              <label>
+                Email
+                <input name="email" type="email" placeholder="you@example.com" required>
+              </label>
+            </div>
+
+            <div class="form__row">
+              <label>
+                Event date
+                <input name="date" type="date">
+              </label>
+              <label>
+                Location
+                <input name="location" type="text" placeholder="City / venue">
+              </label>
+            </div>
+
+            <label>
+              Message
+              <textarea name="message" rows="5" placeholder="Tell me about your session / event..."></textarea>
+            </label>
+
+            <button class="btn btn--primary" type="submit">Send inquiry</button>
+            <p class="tiny muted">
+              Replace <code>https://formspree.io/f/yourFormId</code> with your Formspree endpoint (or change to a mailto workflow).
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="tiny muted">© <span id="year"></span> Magic Moments Photography. All rights reserved.</p>
+      <a class="tiny footer__top" href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" hidden aria-hidden="true" role="dialog" aria-label="Image preview" data-lightbox>
+    <button class="lightbox__close" type="button" aria-label="Close preview" data-lightbox-close>×</button>
+    <img class="lightbox__img" alt="Expanded gallery image" data-lightbox-img />
+  </div>
+</body>
+</html>
