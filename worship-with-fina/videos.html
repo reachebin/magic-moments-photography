@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Videos | Worship the Lord with Fina</title>
+  <meta name="description" content="Watch English & Malayalam worship videos by Fina. Covers and original worship songs." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav">
+      <div class="logo">Worship the Lord with Fina</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="bookings.html">Bookings</a>
+        <a class="btn" id="ytSubscribe" href="#" target="_blank" rel="noopener">Subscribe</a>
+      </div>
+    </nav>
+
+    <section class="hero small">
+      <h1>Videos</h1>
+      <p class="lead">Playlist embed auto-updates when you upload new videos.</p>
+    </section>
+  </header>
+
+  <main class="wrap">
+    <p class="tiny">Replace PLAYLIST_ID with your YouTube playlist ID (Uploads or a custom “Worship” playlist).</p>
+
+    <div class="video">
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?list=PLAYLIST_ID"
+        title="YouTube playlist"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+  </main>
+
+  <footer class="wrap footer">
+    <p class="tiny">© <span id="year"></span> Worship the Lord with Fina</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

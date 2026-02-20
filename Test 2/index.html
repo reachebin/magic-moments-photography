@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Starter Site — Your Niche</title>
+  <meta name="description" content="A simple website starter template you can monetize with affiliates, leads, or products." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav">
+      <div class="logo">YourBrand</div>
+      <div class="links">
+        <a href="#how">How it works</a>
+        <a href="#posts">Guides</a>
+        <a class="btn" href="#cta">Get the checklist</a>
+      </div>
+    </nav>
+
+    <section class="hero">
+      <h1>Build a better decision in <span class="accent">5 minutes</span>.</h1>
+      <p>
+        I review and compare the best options for <strong>[your niche]</strong> so you don’t waste money.
+      </p>
+      <div class="heroActions">
+        <a class="btn" href="#posts">See the guides</a>
+        <a class="btn secondary" href="#cta">Join the newsletter</a>
+      </div>
+      <p class="tiny">Disclosure: Some links may be affiliate links. No extra cost to you.</p>
+    </section>
+  </header>
+
+  <main class="wrap">
+    <section id="how" class="grid3">
+      <div class="card">
+        <h3>1) Pick your goal</h3>
+        <p>Affiliate, lead-gen, or sell a digital product. Start with one.</p>
+      </div>
+      <div class="card">
+        <h3>2) Publish helpful guides</h3>
+        <p>Short, practical, specific. Add comparisons and recommendations.</p>
+      </div>
+      <div class="card">
+        <h3>3) Monetize</h3>
+        <p>Add affiliate links or a contact form to collect leads.</p>
+      </div>
+    </section>
+
+    <section id="posts" class="section">
+      <h2>Starter Guides</h2>
+      <div class="posts">
+        <article class="post">
+          <h3>Best [Product] for [Audience] (2026)</h3>
+          <p>Write a helpful list with pros/cons and who each option is for.</p>
+          <a href="#" class="postLink" data-msg="Open: Best guide">Read →</a>
+        </article>
+
+        <article class="post">
+          <h3>How to choose [Product] without getting scammed</h3>
+          <p>Explain what to look for, common traps, and your checklist.</p>
+          <a href="#" class="postLink" data-msg="Open: How to choose">Read →</a>
+        </article>
+
+        <article class="post">
+          <h3>[Product A] vs [Product B]: honest comparison</h3>
+          <p>Compare pricing, features, best use case, and quick recommendation.</p>
+          <a href="#" class="postLink" data-msg="Open: Comparison">Read →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="cta" class="cta">
+      <h2>Get the free checklist</h2>
+      <p>Join the newsletter and I’ll send you a simple checklist to pick the right option.</p>
+      <form id="leadForm" class="form">
+        <input name="email" type="email" placeholder="you@email.com" required />
+        <button class="btn" type="submit">Send it</button>
+      </form>
+      <p id="status" class="tiny"></p>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p class="tiny">© <span id="year"></span> YourBrand. Built with HTML/CSS/JS.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

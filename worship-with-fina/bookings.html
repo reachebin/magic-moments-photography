@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bookings (Ontario) | Worship the Lord with Fina</title>
+  <meta name="description" content="Book Fina for worship events in Ontario: church services, worship nights, weddings, and home fellowships." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="wrap">
+    <nav class="nav">
+      <div class="logo">Worship the Lord with Fina</div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="videos.html">Videos</a>
+        <a class="btn" id="ytSubscribe" href="#" target="_blank" rel="noopener">Subscribe</a>
+      </div>
+    </nav>
+
+    <section class="hero small">
+      <h1>Bookings in Ontario</h1>
+      <p class="lead">Church events • Worship nights • Weddings • Home fellowships</p>
+      <p class="tiny ml">ഒന്റാരിയോയിൽ പരിപാടികൾക്ക് വിളിക്കാം — സഭ/വർഷിപ്പ് നൈറ്റ്/വിവാഹം/ഹോം ഫെല്ലോഷിപ്പ്.</p>
+    </section>
+  </header>
+
+  <main class="wrap">
+    <section class="section">
+      <h2>Booking Request</h2>
+      <p class="tiny">This simple form uses your email app. Later we can connect a real form.</p>
+
+      <form class="form" id="bookingForm">
+        <input name="name" placeholder="Your name" required />
+        <input name="email" type="email" placeholder="Your email" required />
+        <input name="phone" placeholder="Phone (optional)" />
+        <input name="city" placeholder="City (Ontario)" required />
+        <input name="date" type="date" required />
+        <select name="eventType" required>
+          <option value="">Event type…</option>
+          <option>Church service</option>
+          <option>Worship night</option>
+          <option>Wedding</option>
+          <option>Home fellowship</option>
+          <option>Other</option>
+        </select>
+        <textarea name="message" rows="5" placeholder="Details (venue, set length, language preference, etc.)" required></textarea>
+        <button class="btn" type="submit">Send Request</button>
+      </form>
+
+      <p class="tiny">Or email directly: <a id="emailLink" href="#">your@email.com</a></p>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <p class="tiny">© <span id="year"></span> Worship the Lord with Fina</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
