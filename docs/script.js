@@ -88,7 +88,8 @@ function closeLightbox() {
   if (!lightbox || !lbImg) return;
   lightbox.hidden = true;
   lightbox.setAttribute("aria-hidden", "true");
-  lbImg.src = "";
+  lbImg.removeAttribute("src");
+lbImg.removeAttribute("srcset");
   document.body.style.overflow = "";
 }
 
