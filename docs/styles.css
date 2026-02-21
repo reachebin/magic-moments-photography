@@ -607,7 +607,21 @@ h3{
     background-color: var(--bg);
   }
 
-  .hero__content{ padding: 70px 0 55px; }
+  /* Make hero text sit more inside on mobile */
+.hero__content{
+  padding-left: 28px;
+  padding-right: 28px;
+
+  /* Reduce extra vertical space under the hero content */
+.hero{ min-height: 68vh; }          /* was ~78vh */
+.hero__content{ padding-bottom: 34px; }  /* was larger */
+
+/* Optional: hide the scroll cue on mobile (it adds visual “empty space”) */
+.scroll-cue{ display: none; }
+
+/* Reduce top padding of the portfolio section on mobile */
+#portfolio.section{ padding-top: 48px; } /* default section padding is 72px */
+}
   .hero .kicker{ letter-spacing: .18em; }
 
   /* mobile nav */
