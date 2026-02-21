@@ -594,7 +594,8 @@ h3{
 }
 
 @media (max-width: 760px){
-  .hero{ min-height: 78vh; }
+  /* reduce vertical space so hero doesn't look "empty" */
+  .hero{ min-height: 68vh; }
 
   /* show full hero image on mobile */
   .hero__media{
@@ -607,22 +608,20 @@ h3{
     background-color: var(--bg);
   }
 
-  /* Make hero text sit more inside on mobile */
-.hero__content{
-  padding-left: 28px;
-  padding-right: 28px;
+  /* bring text inward + reduce bottom padding */
+  .hero__content{
+    padding: 70px 0 34px;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
 
-  /* Reduce extra vertical space under the hero content */
-.hero{ min-height: 68vh; }          /* was ~78vh */
-.hero__content{ padding-bottom: 34px; }  /* was larger */
-
-/* Optional: hide the scroll cue on mobile (it adds visual “empty space”) */
-.scroll-cue{ display: none; }
-
-/* Reduce top padding of the portfolio section on mobile */
-#portfolio.section{ padding-top: 48px; } /* default section padding is 72px */
-}
   .hero .kicker{ letter-spacing: .18em; }
+
+  /* reduce gap before portfolio */
+  #portfolio.section{ padding-top: 48px; }
+
+  /* optional: hide scroll cue on small screens */
+  .scroll-cue{ display: none; }
 
   /* mobile nav */
   .nav-toggle{ display:inline-flex; }
