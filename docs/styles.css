@@ -185,12 +185,10 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   overflow: hidden;
 }
 
-/* Background image + readability overlay */
 .hero__media{
   position: absolute;
   inset: 0;
   background:
-    /* darker on left for text, lighter on right */
     linear-gradient(90deg,
       rgba(0,0,0,.68) 0%,
       rgba(0,0,0,.42) 55%,
@@ -200,13 +198,10 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transform: none;
 }
 
-/* Disable extra overlay layer */
 .hero__overlay{ display: none; }
 
-/* Text block */
 .hero__content{
   position: relative;
   padding: 90px 0 70px;
@@ -214,14 +209,12 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   max-width: 760px;
 }
 
-/* Improve readability */
 .hero .kicker,
 .hero h1,
 .hero .subhead{
   text-shadow: 0 2px 14px rgba(0,0,0,.60);
 }
 
-/* Kicker + headline + subhead */
 .kicker{
   letter-spacing: .28em;
   text-transform: uppercase;
@@ -273,27 +266,6 @@ code{ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liber
   width: 1px;
   height: 26px;
   background: rgba(255,255,255,.55);
-}
-
-/* Mobile: show full image (no crop) */
-@media (max-width: 760px){
-  .hero{ min-height: 75vh; }
-
-  .hero__media{
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-color: var(--bg);
-  }
-
-  /* Keep some overlay so text stays readable on light photos */
-  .hero__media{
-    background:
-      linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.10) 100%),
-      url("assets/images/hero.jpg");
-  }
-
-  .hero__content{ padding: 70px 0 55px; }
 }
 
 /* Sections */
@@ -591,9 +563,7 @@ h3{
   padding: 24px;
   z-index: 100;
 }
-.lightbox[hidden]{
-  display: none;
-}
+.lightbox[hidden]{ display:none; }
 
 .lightbox__img{
   max-width: min(1100px, 92vw);
@@ -620,41 +590,53 @@ h3{
   .split, .split--reverse{ grid-template-columns: 1fr; }
   .steps{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats{ grid-template-columns: 1fr; }
+  .masonry{ columns: 2 240px; }
 }
 
 @media (max-width: 760px){
   .hero{ min-height: 78vh; }
 
+  /* show full hero image on mobile */
   .hero__media{
     background-image:
       linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.10) 100%),
       url("assets/images/hero.jpg");
-
-    background-size: cover, contain;   /* overlay covers, image shows fully */
+    background-size: cover, contain;
     background-repeat: no-repeat;
-    background-position: center, top center; /* IMPORTANT: image pinned to top */
+    background-position: center, top center;
     background-color: var(--bg);
-    transform: none;
   }
 
-  .hero__content{
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  .hero__content{ padding: 70px 0 55px; }
+  .hero .kicker{ letter-spacing: .18em; }
 
-  /* reduce kicker tracking slightly on small screens */
-  .hero .kicker{
-    letter-spacing: .18em;
+  /* mobile nav */
+  .nav-toggle{ display:inline-flex; }
+
+  .site-nav{
+    display:none;
+    position:absolute;
+    top: 64px;
+    right: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,.92);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
   }
-}
   .site-nav.is-open{ display:flex; }
+
   .dropdown__menu{
     position: static;
-    display: none;
     box-shadow: none;
     margin-top: 8px;
   }
-  .dropdown.is-open .dropdown__menu{ display:block; }
+
   .form__row{ grid-template-columns: 1fr; }
   h2{ font-size: 34px; }
+  .masonry{ columns: 1 320px; }
 }

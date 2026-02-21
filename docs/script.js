@@ -1,7 +1,7 @@
 // ===== Header elevation on scroll
 const header = document.querySelector("[data-elevate]");
 const yearEl = document.getElementById("year");
-yearEl.textContent = new Date().getFullYear();
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 function onScroll() {
   if (!header) return;
@@ -89,7 +89,6 @@ function closeLightbox() {
   lightbox.hidden = true;
   lightbox.setAttribute("aria-hidden", "true");
   lbImg.removeAttribute("src");
-lbImg.removeAttribute("srcset");
   document.body.style.overflow = "";
 }
 
@@ -109,7 +108,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeLightbox();
 });
 
-// ===== Testimonials slider (edit these)
+// ===== Testimonials slider
 const testimonials = [
   {
     title: "Comfortable, natural, and beautiful.",

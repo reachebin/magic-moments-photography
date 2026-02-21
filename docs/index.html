@@ -14,6 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <!-- IMPORTANT: these paths are correct because /docs is the site root -->
   <link rel="stylesheet" href="styles.css" />
   <script defer src="script.js"></script>
 </head>
@@ -84,9 +85,7 @@
       <div class="container">
         <div class="section__head">
           <h2>Portfolio</h2>
-          <p class="muted">
-            Browse our work by category — weddings, couples, family, singles, and events.
-          </p>
+          <p class="muted">Browse our work by category — weddings, couples, family, singles, and events.</p>
         </div>
 
         <div class="filters" role="tablist" aria-label="Portfolio filters">
@@ -99,97 +98,75 @@
         </div>
 
         <div class="masonry" aria-label="Image gallery">
-          <!-- Weddings (docs/assets/portfolio/weddings/) -->
+          <!-- Weddings -->
           <figure class="tile" data-category="weddings">
-            <img src="assets/portfolio/weddings/IMG_1049.JPG" alt="Wedding photo" loading="lazy">
+            <img src="assets/portfolio/weddings/IMG_1049.jpg" alt="Wedding photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="weddings">
-            <img src="assets/portfolio/weddings/IMG_1051.JPG" alt="Wedding photo" loading="lazy">
+            <img src="assets/portfolio/weddings/IMG_1051.jpg" alt="Wedding photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="weddings">
-            <img src="assets/portfolio/weddings/IMG_1051 (1).JPG" alt="Wedding photo" loading="lazy">
+            <img src="assets/portfolio/weddings/IMG_1051_1.jpg" alt="Wedding photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="weddings">
-            <img src="assets/portfolio/weddings/IMG_1051 (2).JPG" alt="Wedding photo" loading="lazy">
+            <img src="assets/portfolio/weddings/IMG_1051_2.jpg" alt="Wedding photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="weddings">
-            <img src="assets/portfolio/weddings/IMG_4929.JPG" alt="Wedding photo" loading="lazy">
+            <img src="assets/portfolio/weddings/IMG_4929.jpg" alt="Wedding photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="weddings">
-            <img src="assets/portfolio/weddings/IMG_9680.JPG" alt="Wedding photo" loading="lazy">
+            <img src="assets/portfolio/weddings/IMG_9680.jpg" alt="Wedding photo" loading="lazy">
           </figure>
 
-          <!-- Couples (docs/assets/portfolio/couples/) -->
+          <!-- Couples (NOTE: keep .PNG if your files are .PNG) -->
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_2840.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_2840.PNG" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_2841.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_2841.PNG" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_4178.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_4178.jpg" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_4479.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_4479.jpg" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_4519.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_4519.jpg" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_5059.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_5059.jpg" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_8679.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_8679.jpg" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_8820.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_8820.jpg" alt="Couple photo" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="couples">
-            <img src="assets/portfolio/couples/IMG_9960.JPG" alt="Couple photo" loading="lazy">
+            <img src="assets/portfolio/couples/IMG_9960.jpg" alt="Couple photo" loading="lazy">
           </figure>
 
-          <!-- Family (docs/assets/portfolio/family/) -->
+          <!-- Family -->
           <figure class="tile" data-category="family">
-            <img src="assets/portfolio/family/IMG_9756.JPG" alt="Family photo" loading="lazy">
+            <img src="assets/portfolio/family/IMG_9756.jpg" alt="Family photo" loading="lazy">
           </figure>
 
-          <!-- Singles (docs/assets/portfolio/singles/) -->
+          <!-- Singles -->
           <figure class="tile" data-category="singles">
-            <img src="assets/portfolio/singles/IMG_0665.JPG" alt="Singles portrait" loading="lazy">
+            <img src="assets/portfolio/singles/IMG_0665.jpg" alt="Singles portrait" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="singles">
-            <img src="assets/portfolio/singles/IMG_0801.JPG" alt="Singles portrait" loading="lazy">
+            <img src="assets/portfolio/singles/IMG_0801.jpg" alt="Singles portrait" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="singles">
-            <img src="assets/portfolio/singles/IMG_5097.JPG" alt="Singles portrait" loading="lazy">
+            <img src="assets/portfolio/singles/IMG_5097.jpg" alt="Singles portrait" loading="lazy">
           </figure>
-
           <figure class="tile" data-category="singles">
-            <img src="assets/portfolio/singles/IMG_5291.JPG" alt="Singles portrait" loading="lazy">
+            <img src="assets/portfolio/singles/IMG_5291.jpg" alt="Singles portrait" loading="lazy">
           </figure>
 
-          <!-- Events (docs/assets/portfolio/events/) -->
-          <!-- No event images were shown in your screenshots.
-               Add event files later like:
-               <figure class="tile" data-category="events">
-                 <img src="assets/portfolio/events/FILE.JPG" alt="Event photo" loading="lazy">
-               </figure>
-          -->
+          <!-- Events (add later) -->
         </div>
 
         <div class="cta-row">
@@ -223,7 +200,6 @@
 
           <div class="video-card">
             <div class="video-card__frame">
-              <!-- Replace with your real film embed -->
               <iframe
                 title="Sample film embed"
                 src="https://www.youtube.com/embed/ysz5S6PUM-U"
@@ -289,10 +265,7 @@
         </div>
 
         <div class="slider" aria-roledescription="carousel">
-          <div class="slider__viewport" data-slider-viewport>
-            <!-- Slides injected by JS -->
-          </div>
-
+          <div class="slider__viewport" data-slider-viewport></div>
           <div class="slider__controls">
             <button class="btn btn--ghost-dark" type="button" data-prev aria-label="Previous testimonial">←</button>
             <button class="btn btn--ghost-dark" type="button" data-next aria-label="Next testimonial">→</button>
@@ -336,23 +309,19 @@
     <section id="faq" class="section section--alt">
       <div class="container">
         <h2>FAQ</h2>
-
         <div class="faq">
           <details>
             <summary>How do we book?</summary>
             <p class="muted">Use the contact form below with your date and details. We’ll confirm availability and share package options.</p>
           </details>
-
           <details>
             <summary>Do you travel?</summary>
             <p class="muted">Yes. Travel is available for weddings and sessions. Share the location and we’ll include travel details in your quote.</p>
           </details>
-
           <details>
             <summary>When will we receive our photos/film?</summary>
             <p class="muted">Sneak peeks are typically shared within 48 hours. Full delivery depends on season and coverage, and will be confirmed in your booking details.</p>
           </details>
-
           <details>
             <summary>We’re camera-shy — can you help?</summary>
             <p class="muted">Absolutely. Our direction is simple and natural. We focus on comfort first, so your photos feel real—not forced.</p>
