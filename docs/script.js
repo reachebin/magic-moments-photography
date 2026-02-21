@@ -113,17 +113,17 @@ const testimonials = [
   {
     title: "Comfortable, natural, and beautiful.",
     text: "We felt so at ease the entire time. The photos look like us — not overly posed — and every moment feels real.",
-    by: "— Client Name"
+    by: "— Sarah & Daniel"
   },
   {
     title: "Timeless storytelling.",
     text: "Our gallery brought everything back instantly. The details, the emotions, the little candid moments — all captured perfectly.",
-    by: "— Client Name"
+    by: "— Priya & Arun"
   },
   {
     title: "Professional and organized.",
     text: "From planning to delivery, everything was smooth. Communication was clear and the final images were stunning.",
-    by: "— Client Name"
+    by: "— Emma Johnson"
   }
 ];
 
