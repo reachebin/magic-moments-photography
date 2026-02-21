@@ -1,3 +1,5 @@
+/* docs/styles.css */
+
 :root{
   --bg: #f7f4ef;
   --bg2: #f0ece6;
@@ -597,30 +599,46 @@ h3{
   /* reduce vertical space so hero doesn't look "empty" */
   .hero{ min-height: 68vh; }
 
-  /* show full hero image on mobile */
+  /* mobile hero image + overlay */
   .hero__media{
     background-image:
-      linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.10) 100%),
+      linear-gradient(180deg, rgba(0,0,0,.60) 0%, rgba(0,0,0,.28) 55%, rgba(0,0,0,.12) 100%),
       url("assets/images/hero.jpg");
-    background-size: cover, contain;
+    background-size: cover, cover;
     background-repeat: no-repeat;
-    background-position: center, top center;
+    background-position: center, center;
     background-color: var(--bg);
   }
 
-  /* bring text inward + reduce bottom padding */
+  /* bring text inward + remove any panel look on iOS */
   .hero__content{
     padding: 70px 0 34px;
     padding-left: 28px;
     padding-right: 28px;
+    background: transparent;
   }
+  .hero__content, .hero__content *{ background: transparent !important; }
 
   .hero .kicker{ letter-spacing: .18em; }
+
+  /* stronger readability directly on photo */
+  .hero h1{ text-shadow: 0 3px 18px rgba(0,0,0,.78); }
+  .subhead, .kicker{ text-shadow: 0 2px 14px rgba(0,0,0,.78); }
+
+  /* hero buttons: better contrast on mobile */
+  .hero__actions .btn--ghost{
+    background: rgba(255,255,255,.16);
+    border-color: rgba(255,255,255,.42);
+    color: rgba(255,255,255,.96);
+  }
+  .hero__actions .btn--ghost:hover{
+    background: rgba(255,255,255,.22);
+  }
 
   /* reduce gap before portfolio */
   #portfolio.section{ padding-top: 48px; }
 
-  /* optional: hide scroll cue on small screens */
+  /* hide scroll cue on small screens */
   .scroll-cue{ display: none; }
 
   /* mobile nav */
