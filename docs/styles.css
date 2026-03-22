@@ -559,13 +559,23 @@ h3{
 .lightbox{
   position: fixed;
   inset: 0;
-  background: rgba(10,10,10,.72);
-  display:grid;
+  background: rgba(10,10,10,.78);
+  display: grid;
   place-items: center;
-  padding: 24px;
+  padding: 24px 72px;
   z-index: 100;
 }
-.lightbox[hidden]{ display:none; }
+
+.lightbox[hidden]{
+  display:none;
+}
+
+.lightbox__stage{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
 .lightbox__img{
   max-width: min(1100px, 92vw);
@@ -573,18 +583,57 @@ h3{
   border-radius: 18px;
   box-shadow: 0 30px 80px rgba(0,0,0,.45);
 }
-.lightbox__close{
-  position:absolute;
-  top: 18px;
-  right: 18px;
-  width: 44px;
-  height: 44px;
+
+.lightbox__close,
+.lightbox__nav{
+  position: absolute;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,.25);
   background: rgba(255,255,255,.10);
   color: white;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  backdrop-filter: blur(8px);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.lightbox__close{
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
   font-size: 26px;
-  cursor:pointer;
+  line-height: 1;
+}
+
+.lightbox__nav{
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  font-size: 30px;
+  line-height: 1;
+  z-index: 2;
+}
+
+.lightbox__nav--prev{
+  left: 18px;
+}
+
+.lightbox__nav--next{
+  right: 18px;
+}
+
+.lightbox__close:hover,
+.lightbox__nav:hover{
+  background: rgba(255,255,255,.18);
+}
+
+.lightbox__nav:disabled{
+  opacity: .35;
+  cursor: default;
 }
 
 /* Responsive */
@@ -662,4 +711,35 @@ h3{
   .form__row{ grid-template-columns: 1fr; }
   h2{ font-size: 34px; }
   .masonry{ columns: 1 320px; }
+
+  .lightbox{
+    padding: 16px;
+  }
+
+  .lightbox__img{
+    max-width: calc(100vw - 32px);
+    max-height: 78vh;
+  }
+
+  .lightbox__close{
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+  }
+
+  .lightbox__nav{
+    width: 48px;
+    height: 48px;
+    font-size: 26px;
+  }
+
+  .lightbox__nav--prev{
+    left: 8px;
+  }
+
+  .lightbox__nav--next{
+    right: 8px;
+  }
 }

@@ -20,7 +20,6 @@ if (navToggle && nav) {
     navToggle.setAttribute("aria-expanded", String(open));
   });
 
-  // Close on nav click (mobile)
   nav.addEventListener("click", (e) => {
     const t = e.target;
     if (t && t.tagName === "A" && nav.classList.contains("is-open")) {
@@ -34,6 +33,7 @@ if (navToggle && nav) {
 const dropdown = document.querySelector(".dropdown");
 if (dropdown) {
   const btn = dropdown.querySelector(".dropdown__btn");
+
   btn?.addEventListener("click", () => {
     const isOpen = dropdown.classList.toggle("is-open");
     btn.setAttribute("aria-expanded", String(isOpen));
@@ -49,7 +49,7 @@ if (dropdown) {
 
 // ===== Portfolio filters
 const chips = document.querySelectorAll(".chip");
-const tiles = document.querySelectorAll(".tile");
+const tiles = Array.from(document.querySelectorAll(".tile"));
 
 chips.forEach((chip) => {
   chip.addEventListener("click", () => {
@@ -62,6 +62,7 @@ chips.forEach((chip) => {
     chip.setAttribute("aria-selected", "true");
 
     const filter = chip.dataset.filter || "all";
+
     tiles.forEach((tile) => {
       const cat = tile.dataset.category;
       const show = filter === "all" || cat === filter;
@@ -70,15 +71,46 @@ chips.forEach((chip) => {
   });
 });
 
-// ===== Lightbox
+// ===== Lightbox with previous / next navigation
 const lightbox = document.querySelector("[data-lightbox]");
 const lbImg = document.querySelector("[data-lightbox-img]");
 const lbClose = document.querySelector("[data-lightbox-close]");
+const lbPrev = document.querySelector("[data-lightbox-prev]");
+const lbNext = document.querySelector("[data-lightbox-next]");
 
-function openLightbox(src, alt) {
-  if (!lightbox || !lbImg) return;
-  lbImg.src = src;
-  lbImg.alt = alt || "Expanded image";
+let activeIndex = -1;
+
+function getVisibleTiles() {
+  return tiles.filter((tile) => !tile.classList.contains("is-hidden"));
+}
+
+function updateLightboxImage() {
+  const visibleTiles = getVisibleTiles();
+  if (!lbImg || !visibleTiles.length || activeIndex < 0) return;
+
+  if (activeIndex >= visibleTiles.length) {
+    activeIndex = 0;
+  }
+
+  const activeTile = visibleTiles[activeIndex];
+  const img = activeTile.querySelector("img");
+  if (!img) return;
+
+  lbImg.src = img.currentSrc || img.src;
+  lbImg.alt = img.alt || "Expanded image";
+
+  const onlyOneImage = visibleTiles.length < 2;
+  if (lbPrev) lbPrev.disabled = onlyOneImage;
+  if (lbNext) lbNext.disabled = onlyOneImage;
+}
+
+function openLightboxByIndex(index) {
+  const visibleTiles = getVisibleTiles();
+  if (!lightbox || !lbImg || !visibleTiles.length) return;
+
+  activeIndex = ((index % visibleTiles.length) + visibleTiles.length) % visibleTiles.length;
+  updateLightboxImage();
+
   lightbox.hidden = false;
   lightbox.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
@@ -86,26 +118,60 @@ function openLightbox(src, alt) {
 
 function closeLightbox() {
   if (!lightbox || !lbImg) return;
+
   lightbox.hidden = true;
   lightbox.setAttribute("aria-hidden", "true");
   lbImg.removeAttribute("src");
   document.body.style.overflow = "";
+  activeIndex = -1;
+}
+
+function showPreviousImage() {
+  const visibleTiles = getVisibleTiles();
+  if (!visibleTiles.length) return;
+
+  activeIndex = (activeIndex - 1 + visibleTiles.length) % visibleTiles.length;
+  updateLightboxImage();
+}
+
+function showNextImage() {
+  const visibleTiles = getVisibleTiles();
+  if (!visibleTiles.length) return;
+
+  activeIndex = (activeIndex + 1) % visibleTiles.length;
+  updateLightboxImage();
 }
 
 tiles.forEach((tile) => {
   tile.addEventListener("click", () => {
-    const img = tile.querySelector("img");
-    if (!img) return;
-    openLightbox(img.currentSrc || img.src, img.alt);
+    const visibleTiles = getVisibleTiles();
+    const clickedIndex = visibleTiles.indexOf(tile);
+    if (clickedIndex === -1) return;
+
+    openLightboxByIndex(clickedIndex);
   });
 });
 
 lbClose?.addEventListener("click", closeLightbox);
+lbPrev?.addEventListener("click", showPreviousImage);
+lbNext?.addEventListener("click", showNextImage);
+
 lightbox?.addEventListener("click", (e) => {
-  if (e.target === lightbox) closeLightbox();
+  if (e.target === lightbox) {
+    closeLightbox();
+  }
 });
+
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") closeLightbox();
+  if (!lightbox || lightbox.hidden) return;
+
+  if (e.key === "Escape") {
+    closeLightbox();
+  } else if (e.key === "ArrowLeft") {
+    showPreviousImage();
+  } else if (e.key === "ArrowRight") {
+    showNextImage();
+  }
 });
 
 // ===== Testimonials slider
@@ -135,6 +201,7 @@ let index = 0;
 function renderTestimonial(i) {
   if (!viewport) return;
   const t = testimonials[i];
+
   viewport.innerHTML = `
     <div class="quote" aria-live="polite">
       <p class="quote__title">${t.title}</p>
@@ -148,6 +215,7 @@ prevBtn?.addEventListener("click", () => {
   index = (index - 1 + testimonials.length) % testimonials.length;
   renderTestimonial(index);
 });
+
 nextBtn?.addEventListener("click", () => {
   index = (index + 1) % testimonials.length;
   renderTestimonial(index);

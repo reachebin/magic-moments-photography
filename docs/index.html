@@ -422,9 +422,30 @@
   </footer>
 
   <!-- Lightbox -->
-  <div class="lightbox" hidden aria-hidden="true" role="dialog" aria-label="Image preview" data-lightbox>
-    <button class="lightbox__close" type="button" aria-label="Close preview" data-lightbox-close>×</button>
-    <img class="lightbox__img" alt="Expanded gallery image" data-lightbox-img />
+  <div
+    class="lightbox"
+    hidden
+    aria-hidden="true"
+    aria-modal="true"
+    role="dialog"
+    aria-label="Image preview"
+    data-lightbox
+  >
+    <button class="lightbox__close" type="button" aria-label="Close preview" data-lightbox-close>
+      ×
+    </button>
+
+    <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous image" data-lightbox-prev>
+      &#10094;
+    </button>
+
+    <div class="lightbox__stage">
+      <img class="lightbox__img" alt="Expanded gallery image" data-lightbox-img />
+    </div>
+
+    <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next image" data-lightbox-next>
+      &#10095;
+    </button>
   </div>
 </body>
 </html>
