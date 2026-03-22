@@ -1,13 +1,17 @@
 // ===== Header elevation on scroll
 const header = document.querySelector("[data-elevate]");
 const yearEl = document.getElementById("year");
-if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
 
 function onScroll() {
   if (!header) return;
   header.classList.toggle("is-elevated", window.scrollY > 6);
 }
-window.addEventListener("scroll", onScroll);
+
+window.addEventListener("scroll", onScroll, { passive: true });
 onScroll();
 
 // ===== Mobile nav toggle
@@ -21,35 +25,42 @@ if (navToggle && nav) {
   });
 
   nav.addEventListener("click", (e) => {
-    const t = e.target;
-    if (t && t.tagName === "A" && nav.classList.contains("is-open")) {
+    const target = e.target;
+    if (target && target.tagName === "A" && nav.classList.contains("is-open")) {
       nav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
     }
   });
 }
 
-// ===== Dropdown (Info)
+// ===== Dropdown
 const dropdown = document.querySelector(".dropdown");
+
 if (dropdown) {
   const btn = dropdown.querySelector(".dropdown__btn");
 
-  btn?.addEventListener("click", () => {
-    const isOpen = dropdown.classList.toggle("is-open");
-    btn.setAttribute("aria-expanded", String(isOpen));
-  });
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const isOpen = dropdown.classList.toggle("is-open");
+      btn.setAttribute("aria-expanded", String(isOpen));
+    });
 
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-      dropdown.classList.remove("is-open");
-      btn?.setAttribute("aria-expanded", "false");
-    }
-  });
+    document.addEventListener("click", (e) => {
+      if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove("is-open");
+        btn.setAttribute("aria-expanded", "false");
+      }
+    });
+  }
 }
 
 // ===== Portfolio filters
-const chips = document.querySelectorAll(".chip");
+const chips = Array.from(document.querySelectorAll(".chip"));
 const tiles = Array.from(document.querySelectorAll(".tile"));
+
+function getVisibleTiles() {
+  return tiles.filter((tile) => !tile.classList.contains("is-hidden"));
+}
 
 chips.forEach((chip) => {
   chip.addEventListener("click", () => {
@@ -71,7 +82,7 @@ chips.forEach((chip) => {
   });
 });
 
-// ===== Lightbox with previous / next navigation
+// ===== Lightbox
 const lightbox = document.querySelector("[data-lightbox]");
 const lbImg = document.querySelector("[data-lightbox-img]");
 const lbClose = document.querySelector("[data-lightbox-close]");
@@ -79,41 +90,42 @@ const lbPrev = document.querySelector("[data-lightbox-prev]");
 const lbNext = document.querySelector("[data-lightbox-next]");
 
 let activeIndex = -1;
+let touchStartX = 0;
+let touchEndX = 0;
 
-function getVisibleTiles() {
-  return tiles.filter((tile) => !tile.classList.contains("is-hidden"));
-}
-
-function updateLightboxImage() {
+function setLightboxImage() {
   const visibleTiles = getVisibleTiles();
   if (!lbImg || !visibleTiles.length || activeIndex < 0) return;
 
   if (activeIndex >= visibleTiles.length) {
     activeIndex = 0;
   }
+  if (activeIndex < 0) {
+    activeIndex = visibleTiles.length - 1;
+  }
 
   const activeTile = visibleTiles[activeIndex];
   const img = activeTile.querySelector("img");
   if (!img) return;
 
-  lbImg.src = img.currentSrc || img.src;
+  lbImg.src = img.src;
   lbImg.alt = img.alt || "Expanded image";
 
-  const onlyOneImage = visibleTiles.length < 2;
-  if (lbPrev) lbPrev.disabled = onlyOneImage;
-  if (lbNext) lbNext.disabled = onlyOneImage;
+  const disableNav = visibleTiles.length <= 1;
+  if (lbPrev) lbPrev.disabled = disableNav;
+  if (lbNext) lbNext.disabled = disableNav;
 }
 
-function openLightboxByIndex(index) {
+function openLightbox(index) {
   const visibleTiles = getVisibleTiles();
   if (!lightbox || !lbImg || !visibleTiles.length) return;
 
-  activeIndex = ((index % visibleTiles.length) + visibleTiles.length) % visibleTiles.length;
-  updateLightboxImage();
+  activeIndex = index;
+  setLightboxImage();
 
   lightbox.hidden = false;
   lightbox.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  document.body.classList.add("lightbox-open");
 }
 
 function closeLightbox() {
@@ -122,24 +134,24 @@ function closeLightbox() {
   lightbox.hidden = true;
   lightbox.setAttribute("aria-hidden", "true");
   lbImg.removeAttribute("src");
-  document.body.style.overflow = "";
   activeIndex = -1;
+  document.body.classList.remove("lightbox-open");
 }
 
-function showPreviousImage() {
+function showPrev() {
   const visibleTiles = getVisibleTiles();
   if (!visibleTiles.length) return;
 
   activeIndex = (activeIndex - 1 + visibleTiles.length) % visibleTiles.length;
-  updateLightboxImage();
+  setLightboxImage();
 }
 
-function showNextImage() {
+function showNext() {
   const visibleTiles = getVisibleTiles();
   if (!visibleTiles.length) return;
 
   activeIndex = (activeIndex + 1) % visibleTiles.length;
-  updateLightboxImage();
+  setLightboxImage();
 }
 
 tiles.forEach((tile) => {
@@ -148,19 +160,61 @@ tiles.forEach((tile) => {
     const clickedIndex = visibleTiles.indexOf(tile);
     if (clickedIndex === -1) return;
 
-    openLightboxByIndex(clickedIndex);
+    openLightbox(clickedIndex);
   });
 });
 
-lbClose?.addEventListener("click", closeLightbox);
-lbPrev?.addEventListener("click", showPreviousImage);
-lbNext?.addEventListener("click", showNextImage);
+if (lbClose) {
+  lbClose.addEventListener("click", closeLightbox);
+}
+if (lbPrev) {
+  lbPrev.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showPrev();
+  });
+}
+if (lbNext) {
+  lbNext.addEventListener("click", (e) => {
+    e.stopPropagation();
+    showNext();
+  });
+}
 
-lightbox?.addEventListener("click", (e) => {
-  if (e.target === lightbox) {
-    closeLightbox();
-  }
-});
+if (lightbox) {
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  lightbox.addEventListener(
+    "touchstart",
+    (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      touchStartX = e.changedTouches[0].clientX;
+    },
+    { passive: true }
+  );
+
+  lightbox.addEventListener(
+    "touchend",
+    (e) => {
+      if (!e.changedTouches || !e.changedTouches.length) return;
+      touchEndX = e.changedTouches[0].clientX;
+
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          showNext();
+        } else {
+          showPrev();
+        }
+      }
+    },
+    { passive: true }
+  );
+}
 
 document.addEventListener("keydown", (e) => {
   if (!lightbox || lightbox.hidden) return;
@@ -168,9 +222,9 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     closeLightbox();
   } else if (e.key === "ArrowLeft") {
-    showPreviousImage();
+    showPrev();
   } else if (e.key === "ArrowRight") {
-    showNextImage();
+    showNext();
   }
 });
 
@@ -196,12 +250,12 @@ const testimonials = [
 const viewport = document.querySelector("[data-slider-viewport]");
 const prevBtn = document.querySelector("[data-prev]");
 const nextBtn = document.querySelector("[data-next]");
-let index = 0;
+let testimonialIndex = 0;
 
 function renderTestimonial(i) {
   if (!viewport) return;
-  const t = testimonials[i];
 
+  const t = testimonials[i];
   viewport.innerHTML = `
     <div class="quote" aria-live="polite">
       <p class="quote__title">${t.title}</p>
@@ -211,14 +265,18 @@ function renderTestimonial(i) {
   `;
 }
 
-prevBtn?.addEventListener("click", () => {
-  index = (index - 1 + testimonials.length) % testimonials.length;
-  renderTestimonial(index);
-});
+if (prevBtn) {
+  prevBtn.addEventListener("click", () => {
+    testimonialIndex = (testimonialIndex - 1 + testimonials.length) % testimonials.length;
+    renderTestimonial(testimonialIndex);
+  });
+}
 
-nextBtn?.addEventListener("click", () => {
-  index = (index + 1) % testimonials.length;
-  renderTestimonial(index);
-});
+if (nextBtn) {
+  nextBtn.addEventListener("click", () => {
+    testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+    renderTestimonial(testimonialIndex);
+  });
+}
 
-renderTestimonial(index);
+renderTestimonial(testimonialIndex);
