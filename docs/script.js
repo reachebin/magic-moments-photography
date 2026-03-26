@@ -1,8 +1,12 @@
+document.documentElement.classList.remove("no-js");
+document.documentElement.classList.add("js");
+
 const header = document.querySelector("[data-elevate]");
 const yearEl = document.getElementById("year");
 const navToggle = document.querySelector(".nav-toggle");
 const nav = document.getElementById("siteNav");
 const heroMedia = document.querySelector(".hero__media");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
@@ -24,7 +28,10 @@ if (navToggle && nav) {
   });
 
   document.addEventListener("click", (event) => {
-    if (!nav.contains(event.target) && !navToggle.contains(event.target)) {
+    const target = event.target;
+    if (!(target instanceof Node)) return;
+
+    if (!nav.contains(target) && !navToggle.contains(target)) {
       nav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
     }
@@ -38,8 +45,16 @@ if (navToggle && nav) {
   });
 }
 
-const revealElements = Array.from(document.querySelectorAll("[data-reveal]"));
+const staggerGroups = Array.from(document.querySelectorAll("[data-stagger]"));
+staggerGroups.forEach((group) => {
+  const revealChildren = Array.from(group.querySelectorAll("[data-reveal]"));
+  revealChildren.forEach((element, index) => {
+    if (element.hasAttribute("data-reveal-delay")) return;
+    element.style.setProperty("--reveal-delay", `${index * 70}ms`);
+  });
+});
 
+const revealElements = Array.from(document.querySelectorAll("[data-reveal]"));
 revealElements.forEach((element) => {
   const customDelay = element.getAttribute("data-reveal-delay");
   if (customDelay) {
@@ -47,29 +62,35 @@ revealElements.forEach((element) => {
   }
 });
 
-const revealObserver = new IntersectionObserver(
-  (entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add("is-visible");
-      observer.unobserve(entry.target);
-    });
-  },
-  {
-    threshold: 0.14,
-    rootMargin: "0px 0px -40px 0px"
-  }
-);
+function revealAll() {
+  revealElements.forEach((element) => element.classList.add("is-visible"));
+}
 
-revealElements.forEach((element) => revealObserver.observe(element));
+if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+  revealAll();
+} else {
+  const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      threshold: 0.12,
+      rootMargin: "0px 0px -40px 0px"
+    }
+  );
 
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  revealElements.forEach((element) => revealObserver.observe(element));
+}
 
 if (heroMedia && !prefersReducedMotion) {
   let ticking = false;
 
   const updateParallax = () => {
-    const offset = Math.min(window.scrollY * 0.14, 56);
+    const offset = Math.min(window.scrollY * 0.12, 44);
     heroMedia.style.transform = `scale(1.04) translate3d(0, ${offset}px, 0)`;
     ticking = false;
   };
@@ -130,6 +151,7 @@ const lbImg = document.querySelector("[data-lightbox-img]");
 const lbClose = document.querySelector("[data-lightbox-close]");
 const lbPrev = document.querySelector("[data-lightbox-prev]");
 const lbNext = document.querySelector("[data-lightbox-next]");
+const lbCounter = document.querySelector("[data-lightbox-counter]");
 
 let activeIndex = -1;
 let touchStartX = 0;
@@ -148,6 +170,10 @@ function setLightboxImage() {
 
   lbImg.src = image.src;
   lbImg.alt = image.alt || "Expanded gallery image";
+
+  if (lbCounter) {
+    lbCounter.textContent = `${activeIndex + 1} / ${visibleTiles.length}`;
+  }
 
   const disableNav = visibleTiles.length <= 1;
   if (lbPrev) lbPrev.disabled = disableNav;
@@ -190,7 +216,17 @@ function showNext() {
 }
 
 tiles.forEach((tile) => {
+  tile.setAttribute("tabindex", "0");
   tile.addEventListener("click", () => {
+    const visibleTiles = getVisibleTiles();
+    const clickedIndex = visibleTiles.indexOf(tile);
+    if (clickedIndex === -1) return;
+    openLightbox(clickedIndex);
+  });
+
+  tile.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+    event.preventDefault();
     const visibleTiles = getVisibleTiles();
     const clickedIndex = visibleTiles.indexOf(tile);
     if (clickedIndex === -1) return;
@@ -252,3 +288,35 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") showPrev();
   if (event.key === "ArrowRight") showNext();
 });
+
+const contactForm = document.querySelector("[data-mailto-form]");
+if (contactForm instanceof HTMLFormElement) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = String(formData.get("name") || "").trim();
+    const email = String(formData.get("email") || "").trim();
+    const date = String(formData.get("date") || "").trim();
+    const location = String(formData.get("location") || "").trim();
+    const sessionType = String(formData.get("sessionType") || "").trim();
+    const message = String(formData.get("message") || "").trim();
+
+    const subject = sessionType
+      ? `Photography inquiry - ${sessionType}`
+      : "Photography inquiry";
+
+    const body = [
+      `Name: ${name || "-"}`,
+      `Email: ${email || "-"}`,
+      `Date: ${date || "-"}`,
+      `Location: ${location || "-"}`,
+      `Session type: ${sessionType || "-"}`,
+      "",
+      "Message:",
+      message || "-"
+    ].join("\n");
+
+    window.location.href = `mailto:info@mmphotographi.ca?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+}
