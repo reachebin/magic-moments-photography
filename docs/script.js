@@ -7,6 +7,7 @@ const navToggle = document.querySelector(".nav-toggle");
 const nav = document.getElementById("siteNav");
 const heroMedia = document.querySelector(".hero__media");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
@@ -35,6 +36,12 @@ if (navToggle && nav) {
       nav.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
     }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    nav.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
   });
 
   nav.querySelectorAll("a").forEach((link) => {
@@ -79,18 +86,18 @@ if (prefersReducedMotion || !("IntersectionObserver" in window)) {
     },
     {
       threshold: 0.12,
-      rootMargin: "0px 0px -40px 0px"
+      rootMargin: "0px 0px -48px 0px"
     }
   );
 
   revealElements.forEach((element) => revealObserver.observe(element));
 }
 
-if (heroMedia && !prefersReducedMotion) {
+if (heroMedia && !prefersReducedMotion && !coarsePointer) {
   let ticking = false;
 
   const updateParallax = () => {
-    const offset = Math.min(window.scrollY * 0.12, 44);
+    const offset = Math.min(window.scrollY * 0.12, 42);
     heroMedia.style.transform = `scale(1.04) translate3d(0, ${offset}px, 0)`;
     ticking = false;
   };
@@ -137,11 +144,16 @@ chips.forEach((chip) => {
     tiles.forEach((tile) => {
       const matches = filter === "all" || tile.dataset.category === filter;
       tile.classList.toggle("is-hidden", !matches);
+      tile.setAttribute("aria-hidden", String(!matches));
       if (matches) visibleCount += 1;
     });
 
     if (filterStatus) {
       filterStatus.textContent = `Showing ${visibleCount} ${categoryLabel(filter)}.`;
+    }
+
+    if (lightbox && !lightbox.hidden) {
+      closeLightbox();
     }
   });
 });
@@ -156,6 +168,7 @@ const lbCounter = document.querySelector("[data-lightbox-counter]");
 let activeIndex = -1;
 let touchStartX = 0;
 let touchEndX = 0;
+let lastTrigger = null;
 
 function setLightboxImage() {
   const visibleTiles = getVisibleTiles();
@@ -180,15 +193,17 @@ function setLightboxImage() {
   if (lbNext) lbNext.disabled = disableNav;
 }
 
-function openLightbox(index) {
+function openLightbox(index, trigger = null) {
   const visibleTiles = getVisibleTiles();
   if (!lightbox || !lbImg || !visibleTiles.length) return;
 
   activeIndex = index;
+  lastTrigger = trigger;
   setLightboxImage();
   lightbox.hidden = false;
   lightbox.setAttribute("aria-hidden", "false");
   document.body.classList.add("lightbox-open");
+  lbClose?.focus();
 }
 
 function closeLightbox() {
@@ -199,6 +214,9 @@ function closeLightbox() {
   lbImg.removeAttribute("src");
   activeIndex = -1;
   document.body.classList.remove("lightbox-open");
+  if (lastTrigger instanceof HTMLElement) {
+    lastTrigger.focus();
+  }
 }
 
 function showPrev() {
@@ -217,11 +235,14 @@ function showNext() {
 
 tiles.forEach((tile) => {
   tile.setAttribute("tabindex", "0");
+  tile.setAttribute("role", "button");
+  tile.setAttribute("aria-label", "Open image preview");
+
   tile.addEventListener("click", () => {
     const visibleTiles = getVisibleTiles();
     const clickedIndex = visibleTiles.indexOf(tile);
     if (clickedIndex === -1) return;
-    openLightbox(clickedIndex);
+    openLightbox(clickedIndex, tile);
   });
 
   tile.addEventListener("keydown", (event) => {
@@ -230,7 +251,7 @@ tiles.forEach((tile) => {
     const visibleTiles = getVisibleTiles();
     const clickedIndex = visibleTiles.indexOf(tile);
     if (clickedIndex === -1) return;
-    openLightbox(clickedIndex);
+    openLightbox(clickedIndex, tile);
   });
 });
 
